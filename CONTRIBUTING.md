@@ -4,7 +4,7 @@ Thank you for your interest in contributing to this Home Assistant integration! 
 
 ## Getting Started
 
-This integration was built using the [HA-Integration-Template](https://github.com/shortmanflee/HA-Integration-Template). If you're creating your own integration from this template, please update this file with your specific contribution guidelines.
+This integration was built using the [hass-integrations](https://github.com/Ottes42/hass-integrations). If you're creating your own integration from this template, please update this file with your specific contribution guidelines.
 
 ## Types of Contributions
 

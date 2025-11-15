@@ -1,55 +1,3 @@
-# Home Assistant Integration Template
-
-A comprehensive template repository for developing Home Assistant custom integrations with best practices, testing, and development environment pre-configured.
-
-## Features
-
-- 🏗️ **Complete Integration Structure**: Pre-configured directory structure following Home Assistant standards
-- 🐳 **DevContainer Ready**: Full VS Code devcontainer setup with Python 3.13, dependencies, and extensions pre-installed
-- 🧪 **Testing Setup**: Includes pytest configuration with Home Assistant custom component testing
-- 🔧 **Development Environment**: VS Code tasks and configuration for seamless development
-- 📋 **Code Quality**: Ruff linting and formatting pre-configured
-- 🐳 **HACS Ready**: Includes `hacs.json` configuration for Home Assistant Community Store
-- 📝 **Documentation**: Template files and contribution guidelines
-
-## Quick Start
-
-### Using This Template
-
-1. Click "Use this template" button on GitHub
-2. Create your new repository from this template
-3. Clone your new repository:
-
-   ```bash
-   git clone https://github.com/yourusername/your-integration-name.git
-   cd your-integration-name
-   ```
-
-4. **🐳 Recommended**: Open in VS Code and use the devcontainer:
-   - Open VS Code: `code .`
-   - Click "Reopen in Container" when prompted
-   - Everything will be automatically configured!
-
-### Customizing Your Integration
-
-1. **Rename the integration directory**:
-
-   ```bash
-   mv custom_components/integration_template custom_components/your_integration_name
-   ```
-
-2. **Update the integration files**:
-   - Edit `custom_components/your_integration_name/__init__.py`
-   - Update `hacs.json` with your integration details
-   - Modify `README.md` for your specific integration
-
-3. **Update repository references**:
-   Run the provided task to update all references:
-
-   ```bash
-   ./.vscode/dependencies/update_repo_references.sh
-   ```
-
 ## Development Environment
 
 This template provides two development approaches, with **devcontainer being the recommended method** for the best development experience.
@@ -73,42 +21,6 @@ The easiest way to get started is using the included devcontainer configuration:
      - Install recommended VS Code extensions
 
 3. **Ready to develop**: Everything is pre-configured and ready to use!
-
-### 💻 Alternative: Local Development
-
-If you prefer local development without containers:
-
-#### Prerequisites
-
-- Python 3.11+
-- Virtual environment (recommended)
-
-#### Setup
-
-1. **Create and activate virtual environment**:
-
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On macOS/Linux
-   # or
-   .venv\Scripts\activate     # On Windows
-   ```
-
-2. **Install dependencies**:
-   Use the VS Code task "Install Dependencies" or run:
-
-   ```bash
-   pip install --upgrade pip
-   pip install -r requirements.txt
-   ```
-
-3. **Setup development environment**:
-   Use the VS Code task "Setup Config Directory" or run:
-
-   ```bash
-   mkdir -p config
-   ln -sf $(pwd)/custom_components config/custom_components
-   ```
 
 ### Available VS Code Tasks
 

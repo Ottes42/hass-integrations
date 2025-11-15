@@ -1,5 +1,5 @@
 {
-    "name": "shortmanflee/ha_integration_template",
+    "name": "ottes42/ha_integration_template",
     "image": "mcr.microsoft.com/devcontainers/python:3.13",
     "postCreateCommand": "bash .devcontainer/setup.sh",
     "postStartCommand": [
