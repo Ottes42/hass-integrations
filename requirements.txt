@@ -5,7 +5,7 @@ debugpy==1.8.16
 pytest==8.4.1
 pytest-cov==6.2.1
 homeassistant==2025.8.3
-pytest-homeassistant-custom-component==0.13.272
+pytest-homeassistant-custom-component==0.13.295
 mypy==1.13.0
 bandit[toml]==1.7.10
 yamllint==1.35.1
