@@ -68,7 +68,8 @@
         "vulture",
         "workflows",
         "yaml",
-        "yamllint"
+        "yamllint",
+        "timetagger"
     ],
     "ignorePaths": [
         "node_modules/**",

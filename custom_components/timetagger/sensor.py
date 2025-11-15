@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from typing import Any
+from calendar import monthrange
 
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.config_entries import ConfigEntry
@@ -155,7 +156,7 @@ class TTMonthlyBalance(TTBaseSensor):
 
     def _monthly_target(self) -> float:
         """Compute target hours for the month up to today (Mon–Fri)."""
-        from calendar import monthrange
+        
 
         now = datetime.now()
         year, month, today = now.year, now.month, now.day
