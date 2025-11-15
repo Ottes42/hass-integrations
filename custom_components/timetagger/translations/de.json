@@ -1,0 +1,19 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "TimeTagger verbinden",
+        "description": "Stelle die Verbindung zu deiner TimeTagger-Instanz her.",
+        "data": {
+          "api_url": "API-URL (z. B. https://host/timetagger/)",
+          "token": "API-Token",
+          "work_tags": "Work-Tags (z. B. #work,#job)",
+          "daily_target": "Arbeitsstunden pro Tag"
+        }
+      }
+    },
+    "error": {
+      "invalid_url": "Die URL scheint ungültig zu sein."
+    }
+  }
+}

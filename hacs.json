@@ -1,5 +1,7 @@
 {
     "name": "TimeTagger Integration",
     "homeassistant": "2025.8.3",
-    "hacs": "2.0.5"
+    "hacs": "2.0.5",
+    "domains": ["timetagger"],
+    "render_readme": true
 }

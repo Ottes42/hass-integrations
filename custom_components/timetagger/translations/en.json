@@ -1,0 +1,19 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect TimeTagger",
+        "description": "Configure connection to your TimeTagger instance.",
+        "data": {
+          "api_url": "API URL (e.g. https://host/timetagger/)",
+          "token": "API token",
+          "work_tags": "Work tags (e.g. #work,#homeoffice)",
+          "daily_target": "Daily target hours"
+        }
+      }
+    },
+    "error": {
+      "invalid_url": "The URL seems to be invalid."
+    }
+  }
+}
