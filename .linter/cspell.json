@@ -81,7 +81,8 @@
         ".pytest_cache/**",
         ".mypy_cache/**",
         ".ruff_cache/**",
-        "*.egg-info/**"
+        "*.egg-info/**",
+        "**/translations/**"
     ],
     "ignoreRegExpList": [
         "\\b[A-Fa-f0-9]{32,}\\b",

@@ -7,7 +7,7 @@
         "data": {
           "api_url": "API-URL (z. B. https://host/timetagger/)",
           "token": "API-Token",
-          "work_tags": "Work-Tags (z. B. #work,#job)",
+          "work_tags": "Work-Tags (z. B. #work,#home)",
           "daily_target": "Arbeitsstunden pro Tag"
         }
       }
