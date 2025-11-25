@@ -156,7 +156,6 @@ class TTMonthlyBalance(TTBaseSensor):
 
     def _monthly_target(self) -> float:
         """Compute target hours for the month up to today (Mon–Fri)."""
-        
         now = datetime.now()
         year, month, today = now.year, now.month, now.day
         _, _days_in_month = monthrange(year, month)

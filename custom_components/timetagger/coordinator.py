@@ -10,7 +10,7 @@ import async_timeout
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .const import DOMAIN, CONF_API_URL, CONF_TOKEN, CONF_WORK_TAGS
+from .const import CONF_API_URL, CONF_TOKEN, CONF_WORK_TAGS
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -58,7 +58,11 @@ class TimeTaggerCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         headers = {"authtoken": self._token}
 
         async with async_timeout.timeout(30):
-            async with session.get(self._api_url, params=params, headers=headers) as response:
+            async with session.get(
+                self._api_url, 
+                params=params, 
+                headers=headers
+            ) as response:
                 if response.status != 200:
                     body = await response.text()
                     raise UpdateFailed(

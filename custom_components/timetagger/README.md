@@ -6,7 +6,7 @@ A Home Assistant integration for [TimeTagger](https://timetagger.app), a time tr
 
 - Track daily, weekly, and monthly working hours
 - Monitor remaining work time for the current week
-- Calculate monthly working time balance (overtime/undertime)
+- Calculate monthly working time balance (overtime)
 - Configurable daily target hours
 - Support for work tags filtering
 - Automatic updates every 5 minutes
@@ -81,7 +81,7 @@ The integration provides the following sensor entities:
 
 - **Entity ID**: `sensor.timetagger_monthly_working_time_balance`
 - **Unit**: hours (h)
-- **Description**: Monthly balance showing overtime (positive) or undertime (negative)
+- **Description**: Monthly balance showing overtime (positive) or negative
 - **Attributes**:
   - `worked_hours`: Actual hours worked this month
   - `target_hours`: Target hours for the month based on weekdays passed

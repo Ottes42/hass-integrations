@@ -8,6 +8,7 @@
 
 **Tag your time, get the insight.** An open source time-tracker with an interactive user experience and powerful reporting.
 
+See [README.md](custom_components/timetagger/README.md)
 
 ## Contributing
 
