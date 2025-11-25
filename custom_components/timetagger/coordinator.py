@@ -30,7 +30,7 @@ class TimeTaggerCoordinator(DataUpdateCoordinator[dict[str, Any]]):
     def __init__(self, hass: HomeAssistant, config: dict[str, Any]) -> None:
         self._hass = hass
         self._api_url: str = config[CONF_API_URL] + "/api/v2/records"
-        self._token: str = config[CONF_TOKEN]
+        self._token: str = config.get(CONF_TOKEN) or ""
         self._work_tags: str = config[CONF_WORK_TAGS]
 
         super().__init__(
