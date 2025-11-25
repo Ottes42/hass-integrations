@@ -1,3 +1,13 @@
+# Ottes42' Home Assistant HACS Integrations
+
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Ottes42&repository=hass-integrations&category=Integration)
+
+## TimeTagger Integration
+
+Tag your time, get the insight.
+
+An open source time-tracker with an interactive user experience and powerful reporting.
+
 ## Development Environment
 
 This template provides two development approaches, with **devcontainer being the recommended method** for the best development experience.
