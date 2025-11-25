@@ -231,7 +231,7 @@ class TestTTMonthlyBalance:
         
         # Worked: 25h (from mock data)
         # Target: 80h (10 weekdays * 8h)
-        # Balance: 25h - 80h = -55h (undertime)
+        # Balance: 25h - 80h = -55h (negative)
         assert sensor.native_value == -55.0
 
     @patch("custom_components.timetagger.sensor.datetime")

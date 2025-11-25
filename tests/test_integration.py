@@ -104,7 +104,7 @@ async def test_integration_coordinator_update_failure(
     mock_config_entry: ConfigEntry,
     mock_aiohttp_session,
 ) -> None:
-    """Test integration behavior when coordinator update fails."""
+    """Test integration behaviour when coordinator update fails."""
     # Mock API error
     mock_response = AsyncMock()
     mock_response.status = 401
