@@ -4,7 +4,7 @@ DOMAIN = "timetagger"
 
 CONF_API_URL = "api_url"
 # Do not hardcode secrets; token must be provided via configuration
-CONF_TOKEN = None
+CONF_TOKEN: str | None = None
 CONF_WORK_TAGS = "work_tags"
 CONF_DAILY_TARGET = "daily_target"
 
