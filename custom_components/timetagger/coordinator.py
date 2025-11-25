@@ -51,18 +51,20 @@ class TimeTaggerCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             "running": "false",
             "hidden": "false",
             "tag": self._work_tags,
+            # cspell:ignore timerange
             "timerange": f"{_utc_ts(start)}-{_utc_ts(end)}",
         }
+        # cspell:ignore authtoken
         headers = {"authtoken": self._token}
 
         async with async_timeout.timeout(30):
-            async with session.get(self._api_url, params=params, headers=headers) as resp:
-                if resp.status != 200:
-                    body = await resp.text()
+            async with session.get(self._api_url, params=params, headers=headers) as response:
+                if response.status != 200:
+                    body = await response.text()
                     raise UpdateFailed(
-                        f"TimeTagger API error: {resp.status} - {body}"
+                        f"TimeTagger API error: {response.status} - {body}"
                     )
-                data = await resp.json()
+                data = await response.json()
                 return data.get("records", [])
 
     async def _async_update_data(self) -> dict[str, Any]:

@@ -61,9 +61,9 @@ class TTBaseSensor(CoordinatorEntity[TimeTaggerCoordinator], SensorEntity):
 
 
 class TTWorkToday(TTBaseSensor):
-    """Arbeitszeit heute."""
+    """Working hours today."""
 
-    _attr_name = "Arbeitszeit heute"
+    _attr_name = "Working hours today"
     _attr_unique_id = "timetagger_work_today"
     _attr_native_unit_of_measurement = "h"
 
@@ -74,9 +74,9 @@ class TTWorkToday(TTBaseSensor):
 
 
 class TTWorkWeek(TTBaseSensor):
-    """Arbeitszeit diese Woche."""
+    """Working hours this week."""
 
-    _attr_name = "Arbeitszeit diese Woche"
+    _attr_name = "Working hours this week"
     _attr_unique_id = "timetagger_work_week"
     _attr_native_unit_of_measurement = "h"
 
@@ -87,9 +87,9 @@ class TTWorkWeek(TTBaseSensor):
 
 
 class TTWorkMonth(TTBaseSensor):
-    """Arbeitszeit diesen Monat."""
+    """Working hours this month."""
 
-    _attr_name = "Arbeitszeit diesen Monat"
+    _attr_name = "Working hours this month"
     _attr_unique_id = "timetagger_work_month"
     _attr_native_unit_of_measurement = "h"
 
@@ -100,9 +100,9 @@ class TTWorkMonth(TTBaseSensor):
 
 
 class TTRemainingWeek(TTBaseSensor):
-    """Restzeit diese Woche (Soll - Ist)."""
+    """Remaining time this week (Target - Actual)."""
 
-    _attr_name = "Restzeit diese Woche"
+    _attr_name = "Remaining time this week"
     _attr_unique_id = "timetagger_remaining_week"
     _attr_native_unit_of_measurement = "h"
 
@@ -139,9 +139,9 @@ class TTRemainingWeek(TTBaseSensor):
 
 
 class TTMonthlyBalance(TTBaseSensor):
-    """Monats-Saldo (Über-/Minusstunden diesen Monat)."""
+    """Monthly balance (Over-/under-hours this month)."""
 
-    _attr_name = "Monats-Saldo Arbeitszeit"
+    _attr_name = "Monthly working time balance"
     _attr_unique_id = "timetagger_monthly_balance"
     _attr_native_unit_of_measurement = "h"
 
@@ -157,7 +157,6 @@ class TTMonthlyBalance(TTBaseSensor):
     def _monthly_target(self) -> float:
         """Compute target hours for the month up to today (Mon–Fri)."""
         
-
         now = datetime.now()
         year, month, today = now.year, now.month, now.day
         _, _days_in_month = monthrange(year, month)
