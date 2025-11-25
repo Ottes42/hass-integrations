@@ -26,7 +26,8 @@ class TimeTaggerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     def is_matching(self, other_flow: config_entries.ConfigFlow) -> bool:
         """Return True if other_flow is matching this flow."""
-        if not isinstance(other_flow, TimeTaggerConfigFlow): return False
+        if not isinstance(other_flow, TimeTaggerConfigFlow):
+            return False
         self_api_url = self.context.get("api_url") or (
             self.init_data.get(CONF_API_URL) if hasattr(self, "init_data") else None
         )
@@ -34,7 +35,12 @@ class TimeTaggerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         other_api_url = other_flow.context.get("api_url") or (
             other_init.get(CONF_API_URL) if other_init else None
         )
-        if self_api_url and other_api_url:
+        if (
+            self_api_url
+            and other_api_url
+            and isinstance(self_api_url, str)
+            and isinstance(other_api_url, str)
+        ):
             # Normalize URLs by removing trailing slashes for comparison
             self_normalized = self_api_url.rstrip("/").lower()
             other_normalized = other_api_url.rstrip("/").lower()
