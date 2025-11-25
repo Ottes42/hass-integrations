@@ -1,4 +1,5 @@
 """Test TimeTagger sensors."""
+
 from __future__ import annotations
 
 from datetime import datetime
@@ -29,14 +30,14 @@ async def test_async_setup_entry(
     """Test sensor setup entry."""
     hass.data.setdefault(DOMAIN, {})
     hass.data[DOMAIN][mock_config_entry.entry_id] = mock_coordinator
-    
+
     entities = []
-    
+
     def mock_add_entities(new_entities):
         entities.extend(new_entities)
-    
+
     await async_setup_entry(hass, mock_config_entry, mock_add_entities)
-    
+
     assert len(entities) == 5
     assert isinstance(entities[0], TTWorkToday)
     assert isinstance(entities[1], TTWorkWeek)
@@ -76,7 +77,7 @@ class TestTTWorkToday:
     def test_attributes(self, mock_coordinator, mock_config_entry) -> None:
         """Test sensor attributes."""
         sensor = TTWorkToday(mock_coordinator, mock_config_entry)
-        
+
         assert sensor._attr_name == "Working hours today"
         assert sensor._attr_unique_id == "timetagger_work_today"
         assert sensor._attr_native_unit_of_measurement == "h"
@@ -85,14 +86,14 @@ class TestTTWorkToday:
     def test_native_value(self, mock_coordinator, mock_config_entry) -> None:
         """Test native value calculation."""
         sensor = TTWorkToday(mock_coordinator, mock_config_entry)
-        
+
         # Test with mock data (2 records: 8h + 1h = 9h)
         assert sensor.native_value == 9.0
 
     def test_device_info(self, mock_coordinator, mock_config_entry) -> None:
         """Test device info."""
         sensor = TTWorkToday(mock_coordinator, mock_config_entry)
-        
+
         device_info = sensor._attr_device_info
         assert device_info["identifiers"] == {(DOMAIN, mock_config_entry.entry_id)}
         assert device_info["name"] == "TimeTagger"
@@ -106,7 +107,7 @@ class TestTTWorkWeek:
     def test_attributes(self, mock_coordinator, mock_config_entry) -> None:
         """Test sensor attributes."""
         sensor = TTWorkWeek(mock_coordinator, mock_config_entry)
-        
+
         assert sensor._attr_name == "Working hours this week"
         assert sensor._attr_unique_id == "timetagger_work_week"
         assert sensor._attr_native_unit_of_measurement == "h"
@@ -114,7 +115,7 @@ class TestTTWorkWeek:
     def test_native_value(self, mock_coordinator, mock_config_entry) -> None:
         """Test native value calculation."""
         sensor = TTWorkWeek(mock_coordinator, mock_config_entry)
-        
+
         # Test with mock data (3 records: 8h + 1h + 8h = 17h)
         assert sensor.native_value == 17.0
 
@@ -125,7 +126,7 @@ class TestTTWorkMonth:
     def test_attributes(self, mock_coordinator, mock_config_entry) -> None:
         """Test sensor attributes."""
         sensor = TTWorkMonth(mock_coordinator, mock_config_entry)
-        
+
         assert sensor._attr_name == "Working hours this month"
         assert sensor._attr_unique_id == "timetagger_work_month"
         assert sensor._attr_native_unit_of_measurement == "h"
@@ -133,7 +134,7 @@ class TestTTWorkMonth:
     def test_native_value(self, mock_coordinator, mock_config_entry) -> None:
         """Test native value calculation."""
         sensor = TTWorkMonth(mock_coordinator, mock_config_entry)
-        
+
         # Test with mock data (4 records: 8h + 1h + 8h + 8h = 25h)
         assert sensor.native_value == 25.0
 
@@ -144,50 +145,56 @@ class TestTTRemainingWeek:
     def test_attributes(self, mock_coordinator, mock_config_entry) -> None:
         """Test sensor attributes."""
         sensor = TTRemainingWeek(mock_coordinator, mock_config_entry, 8.0)
-        
+
         assert sensor._attr_name == "Remaining time this week"
         assert sensor._attr_unique_id == "timetagger_remaining_week"
         assert sensor._attr_native_unit_of_measurement == "h"
         assert sensor._daily_target == 8.0
 
     @patch("custom_components.timetagger.sensor.datetime")
-    def test_week_target(self, mock_datetime, mock_coordinator, mock_config_entry) -> None:
+    def test_week_target(
+        self, mock_datetime, mock_coordinator, mock_config_entry
+    ) -> None:
         """Test week target calculation."""
         # Mock Monday (weekday = 0)
         mock_datetime.now.return_value.weekday.return_value = 0
-        
+
         sensor = TTRemainingWeek(mock_coordinator, mock_config_entry, 8.0)
         assert sensor._week_target() == 8.0  # 1 day * 8 hours
-        
+
         # Mock Friday (weekday = 4)
         mock_datetime.now.return_value.weekday.return_value = 4
         assert sensor._week_target() == 40.0  # 5 days * 8 hours
-        
+
         # Mock Saturday (weekday = 5) - should still be 5 days max
         mock_datetime.now.return_value.weekday.return_value = 5
         assert sensor._week_target() == 40.0  # 5 days * 8 hours (capped)
 
     @patch("custom_components.timetagger.sensor.datetime")
-    def test_native_value(self, mock_datetime, mock_coordinator, mock_config_entry) -> None:
+    def test_native_value(
+        self, mock_datetime, mock_coordinator, mock_config_entry
+    ) -> None:
         """Test native value calculation."""
         # Mock Wednesday (weekday = 2)
         mock_datetime.now.return_value.weekday.return_value = 2
-        
+
         sensor = TTRemainingWeek(mock_coordinator, mock_config_entry, 8.0)
-        
+
         # Target: 3 days * 8 hours = 24h
         # Worked: 17h (from mock data)
         # Remaining: 24h - 17h = 7h
         assert sensor.native_value == 7.0
 
     @patch("custom_components.timetagger.sensor.datetime")
-    def test_extra_state_attributes(self, mock_datetime, mock_coordinator, mock_config_entry) -> None:
+    def test_extra_state_attributes(
+        self, mock_datetime, mock_coordinator, mock_config_entry
+    ) -> None:
         """Test extra state attributes."""
         mock_datetime.now.return_value.weekday.return_value = 2
-        
+
         sensor = TTRemainingWeek(mock_coordinator, mock_config_entry, 8.0)
         attributes = sensor.extra_state_attributes
-        
+
         assert attributes["target_hours"] == 24.0
         assert attributes["worked_hours"] == 17.0
 
@@ -198,50 +205,56 @@ class TestTTMonthlyBalance:
     def test_attributes(self, mock_coordinator, mock_config_entry) -> None:
         """Test sensor attributes."""
         sensor = TTMonthlyBalance(mock_coordinator, mock_config_entry, 8.0)
-        
+
         assert sensor._attr_name == "Monthly working time balance"
         assert sensor._attr_unique_id == "timetagger_monthly_balance"
         assert sensor._attr_native_unit_of_measurement == "h"
         assert sensor._daily_target == 8.0
 
     @patch("custom_components.timetagger.sensor.datetime")
-    def test_monthly_target(self, mock_datetime, mock_coordinator, mock_config_entry) -> None:
+    def test_monthly_target(
+        self, mock_datetime, mock_coordinator, mock_config_entry
+    ) -> None:
         """Test monthly target calculation."""
         # Mock January 15th, 2022 (Saturday)
         mock_datetime.now.return_value = datetime(2022, 1, 15)
         mock_datetime.side_effect = lambda *args, **kwargs: datetime(*args, **kwargs)
-        
+
         sensor = TTMonthlyBalance(mock_coordinator, mock_config_entry, 8.0)
-        
+
         # Calculate expected workdays from Jan 1-15, 2022
         # 1-2: Weekend, 3-7: 5 weekdays, 8-9: Weekend, 10-14: 5 weekdays, 15: Saturday
         # Total weekdays: 10
         expected_target = 10 * 8.0  # 80 hours
-        
+
         assert sensor._monthly_target() == expected_target
 
     @patch("custom_components.timetagger.sensor.datetime")
-    def test_native_value(self, mock_datetime, mock_coordinator, mock_config_entry) -> None:
+    def test_native_value(
+        self, mock_datetime, mock_coordinator, mock_config_entry
+    ) -> None:
         """Test native value calculation."""
         # Mock a date where monthly target would be 80 hours
         mock_datetime.now.return_value = datetime(2022, 1, 15)
         mock_datetime.side_effect = lambda *args, **kwargs: datetime(*args, **kwargs)
-        
+
         sensor = TTMonthlyBalance(mock_coordinator, mock_config_entry, 8.0)
-        
+
         # Worked: 25h (from mock data)
         # Target: 80h (10 weekdays * 8h)
         # Balance: 25h - 80h = -55h (negative)
         assert sensor.native_value == -55.0
 
     @patch("custom_components.timetagger.sensor.datetime")
-    def test_extra_state_attributes(self, mock_datetime, mock_coordinator, mock_config_entry) -> None:
+    def test_extra_state_attributes(
+        self, mock_datetime, mock_coordinator, mock_config_entry
+    ) -> None:
         """Test extra state attributes."""
         mock_datetime.now.return_value = datetime(2022, 1, 15)
         mock_datetime.side_effect = lambda *args, **kwargs: datetime(*args, **kwargs)
-        
+
         sensor = TTMonthlyBalance(mock_coordinator, mock_config_entry, 8.0)
         attributes = sensor.extra_state_attributes
-        
+
         assert attributes["worked_hours"] == 25.0
         assert attributes["target_hours"] == 80.0

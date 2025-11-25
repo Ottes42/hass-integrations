@@ -1,4 +1,5 @@
 """Test TimeTagger constants."""
+
 from __future__ import annotations
 
 from custom_components.timetagger.const import (

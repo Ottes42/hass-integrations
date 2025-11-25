@@ -59,9 +59,7 @@ class TimeTaggerCoordinator(DataUpdateCoordinator[dict[str, Any]]):
 
         async with async_timeout.timeout(30):
             async with session.get(
-                self._api_url,
-                params=params,
-                headers=headers
+                self._api_url, params=params, headers=headers
             ) as response:
                 if response.status != 200:
                     body = await response.text()
