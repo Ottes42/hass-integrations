@@ -69,7 +69,9 @@ class TimeTaggerCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                         f"TimeTagger API error: {response.status} - {body}"
                     )
                 data = await response.json()
-                return data.get("records", [])
+                records = data.get("records", [])
+                # Ensure we return the expected type
+                return records if isinstance(records, list) else []
 
     async def _async_update_data(self) -> dict[str, Any]:
         """Fetch data from TimeTagger API."""
